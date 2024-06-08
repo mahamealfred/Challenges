@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    height: 100vh;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.photo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.photo{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.photo::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: -100%;
+    opacity: 0;
+    transition: .1s;
+    transition-delay: .2s;
+    z-index: 1;
+  }
+  .photo::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  bottom:0;
+  left:0;
+  border-radius: 10px;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: .3s;
+  }
+  .photo:hover::after{
+    height: 100%;
+    }
+  .photo:hover::before{
+     margin-top: 0;
+     opacity: 1;
+   }
+  
+
+.link-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.photo-container:hover .link-container {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .know-more {
+    text-decoration: none;
+    color: #364af9;
+    font-weight: bold;
+    position: relative;
+  }
+  
+.arrow {
+    display: inline-block;
+    margin-left: 5px;
+    transition: transform 0.3s;
+}
+
+.photo-container:hover .arrow {
+    transform: translateX(5px);
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.lightbox.visible {
+    display: flex;
+}
+
+.lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+}
+@media (max-width: 1200px) {
+    .gallery {
+      grid-template-rows: repeat(0, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .gallery {
+      grid-template-rows: 1fr;
+      grid-template-rows: repeat(1, 1fr);
+    }
+  }
+  
